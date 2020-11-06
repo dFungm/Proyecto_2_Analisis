@@ -10,10 +10,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon, QPixmap
+import time as tm
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        self.rotationVar = 0
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(500, 500)
         MainWindow.setMaximumSize(QtCore.QSize(800, 600))
@@ -32,6 +34,9 @@ class Ui_MainWindow(object):
         self.rotated_pixmap3 = self.barra.transformed(transform_3)
         self.rotated_pixmap4 = self.barra.transformed(transform_4)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.Button = QtWidgets.QPushButton("Rotar", self.centralwidget)
+        self.Button.setGeometry(QtCore.QRect(0, 0, 60, 20))
+        self.Button.clicked.connect(self.rotation)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(210, 210, 47, 13))
@@ -94,6 +99,20 @@ class Ui_MainWindow(object):
         self.label_7.setPixmap(self.rotated_pixmap1)
         self.label_7.resize(self.rotated_pixmap1.width(), self.rotated_pixmap1.height())
         self.menuEcho_Locator.setTitle(_translate("MainWindow", "Echo Locator"))
+    def rotation(self):
+        if self.rotationVar == 355:
+            self.rotationVar = 0
+        else:
+            self.rotationVar += 5
+        transform = QtGui.QTransform()
+        transform.rotate(self.rotationVar)
+        print(self.rotationVar)
+        rotated = self.echo.transformed(transform)
+        self.label.setPixmap(rotated)
+        self.label.resize(rotated.width(), rotated.height())
+        return
+    def infront(self):
+        pass
 
 
 if __name__ == "__main__":
