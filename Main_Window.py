@@ -111,9 +111,8 @@ class Ui_MainWindow(QWidget):
 
         #PRUEBA
         qp = QPainter(self.lbl.pixmap())
-        self.drawPoints(qp)
-        self.drawPoints(qp)
-        self.drawPoints(qp)
+        for i in range(500):
+            self.drawPoints(qp)
 
 
     def retranslateUi(self):
@@ -158,24 +157,11 @@ class Ui_MainWindow(QWidget):
     def infront(self):
         pass
 
-    # def keyPressEvent(self, event):
-    #     gey = event.key()
-    #     if gey == Qt.Key_M:
-    #         self.paintBool = True
-    #         self.update()
-    #
-    # def paintEvent(self, e):
-    #     if self.paintBool:
-    #         qp = QPainter(self.lbl.pixmap())
-    #         self.drawPoints(qp)
-    #         qp.end()
-
     def drawPoints(self, qp):
         pen = QtGui.QPen()
-        pen.setWidth(3)
+        pen.setWidth(1)
         pen.setColor(Qt.yellow)
         qp.setPen(pen)
-        self.paintBool = False
 
         size = self.lbl.size()
         x = random.randint(1, size.width() - 1)
