@@ -110,9 +110,8 @@ class Ui_MainWindow(QWidget):
         QtCore.QMetaObject.connectSlotsByName(self.MainWindow)
 
         #PRUEBA
-        qp = QPainter(self.lbl.pixmap())
-        for i in range(500):
-            self.drawPoints(qp)
+        self.qp = QPainter(self.lbl.pixmap())
+
 
 
     def retranslateUi(self):
@@ -125,6 +124,7 @@ class Ui_MainWindow(QWidget):
         self.label_5.setText(_translate("MainWindow", "TextLabel"))
         self.label_6.setText(_translate("MainWindow", "TextLabel"))
         self.label_7.setText(_translate("MainWindow", "TextLabel"))
+        self.Muros = [[self.label_2.x,self.label_2.y],[self.label_3.x,self.label_3.y],[self.label_4.x,self.label_4.y],[self.label_5.x,self.label_5.y],[self.label_6.x,self.label_6.y],[self.label_7.x,self.label_7.y]]
         self.label.setPixmap(self.echo)
         self.label.resize(self.echo.width(), self.echo.height())
         self.label_2.setPixmap(self.barra)
@@ -148,15 +148,40 @@ class Ui_MainWindow(QWidget):
             self.rotationVar += 5
         transform = QtGui.QTransform()
         transform.rotate(self.rotationVar)
-        print(self.rotationVar)
         rotated = self.echo.transformed(transform)
         self.label.setPixmap(rotated)
         self.label.resize(rotated.width(), rotated.height())
+        self.rayo()
         return
 
-    def infront(self):
-        pass
-
+    def movimiento(self,x,y,movx,movy):
+        while (True):
+            print([x,y])
+            if ([x,y] in self.Muros or (x == 0 or x == 500 or y == 0 or y == 500)):
+                self.drawPointsPrueba(self.qp,250,100)
+                break
+            else:
+                x+=movx
+                y+=movy
+    def rayo(self):
+        x = self.label.x()
+        y = self.label.y()
+        if (self.rotationVar < 90):
+            self.movimiento(x,y,1,-1)
+        elif (self.rotationVar > 90 and self.rotationVar < 180):
+            self.movimiento(x,y,-1,-1)
+        elif (self.rotationVar > 180 and self.rotationVar < 270):
+            self.movimiento(x,y,-1,1)
+        elif (self.rotationVar > 270 and self.rotationVar < 360):
+            self.movimiento(x,y,1,1)
+        elif (self.rotationVar == 0):
+            self.movimiento(x,y,1,0)
+        elif (self.rotationVar == 90):
+            self.movimiento(x,y,0,-1)
+        elif (self.rotationVar == 180):
+            self.movimiento(x,y,-1,0)
+        elif (self.rotationVar == 270):
+            self.movimiento(x,y,0,1)
     def drawPoints(self, qp):
         pen = QtGui.QPen()
         pen.setWidth(1)
@@ -167,7 +192,14 @@ class Ui_MainWindow(QWidget):
         x = random.randint(1, size.width() - 1)
         y = random.randint(1, size.height() - 1)
         point = qp.drawPoint(x, y)
+    def drawPointsPrueba(self, qp,x,y):
+        pen = QtGui.QPen()
+        pen.setWidth(1)
+        pen.setColor(Qt.yellow)
+        qp.setPen(pen)
 
+        size = self.lbl.size()
+        point = qp.drawPoint(x, y)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
