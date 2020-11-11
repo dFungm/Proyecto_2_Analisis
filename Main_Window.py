@@ -109,9 +109,6 @@ class Ui_MainWindow(QWidget):
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.MainWindow)
 
-        #PRUEBA
-        self.qp = QPainter(self.lbl.pixmap())
-
 
 
     def retranslateUi(self):
@@ -124,7 +121,6 @@ class Ui_MainWindow(QWidget):
         self.label_5.setText(_translate("MainWindow", "TextLabel"))
         self.label_6.setText(_translate("MainWindow", "TextLabel"))
         self.label_7.setText(_translate("MainWindow", "TextLabel"))
-        self.Muros = [[self.label_2.x,self.label_2.y],[self.label_3.x,self.label_3.y],[self.label_4.x,self.label_4.y],[self.label_5.x,self.label_5.y],[self.label_6.x,self.label_6.y],[self.label_7.x,self.label_7.y]]
         self.label.setPixmap(self.echo)
         self.label.resize(self.echo.width(), self.echo.height())
         self.label_2.setPixmap(self.barra)
@@ -139,7 +135,31 @@ class Ui_MainWindow(QWidget):
         self.label_6.resize(self.barra.width(), self.barra.height())
         self.label_7.setPixmap(self.rotated_pixmap1)
         self.label_7.resize(self.rotated_pixmap1.width(), self.rotated_pixmap1.height())
+        self.Muros = [self.label_2,self.label_3,self.label_4,self.label_5,self.label_6,self.label_7]
+        self.MurosCoords = []
+        for muro in self.Muros:
+            i=0
+            k=0
+            x = muro.x()
+            y = muro.y()
+            cord = [x,y]
+            while i != muro.width()//2 and k != muro.height()//2:
+                cordtemp = [x-i,y+k]
+                cordtemp2 = [x+i,y-k]
+                cordtemp3 = [x - i, y - k]
+                cordtemp4 = [x + i, y + k]
+                self.MurosCoords.append(cordtemp)
+                self.MurosCoords.append(cordtemp2)
+                self.MurosCoords.append(cordtemp3)
+                self.MurosCoords.append(cordtemp4)
+                i+=1
+                k+=1
+            self.MurosCoords.append(cord)
+
         self.menuEcho_Locator.setTitle(_translate("MainWindow", "Echo Locator"))
+        self.rotX = self.label.x() + 25
+        self.roty = self.label.y() + 13
+        self.drawPointsPrueba(QPainter(self.lbl.pixmap()),self.rotX,self.roty)
 
     def rotation(self):
         if self.rotationVar == 355:
@@ -155,33 +175,41 @@ class Ui_MainWindow(QWidget):
         return
 
     def movimiento(self,x,y,movx,movy):
+        size = self.lbl.size()
         while (True):
-            print([x,y])
-            if ([x,y] in self.Muros or (x == 0 or x == 500 or y == 0 or y == 500)):
-                self.drawPointsPrueba(self.qp,250,100)
-                break
+            if ([x,y] in self.MurosCoords or (x == 0 or x == size.width() - 1 or y == 0 or y == size.height() - 1)):
+                self.drawPointsPrueba(QPainter(self.lbl.pixmap()),x,y)
+                return
             else:
                 x+=movx
                 y+=movy
+                self.drawPointsPrueba(QPainter(self.lbl.pixmap()), x, y)
     def rayo(self):
-        x = self.label.x()
-        y = self.label.y()
         if (self.rotationVar < 90):
-            self.movimiento(x,y,1,-1)
+            self.roty += 2
+            self.movimiento(self.rotX,self.roty,1,1)
         elif (self.rotationVar > 90 and self.rotationVar < 180):
-            self.movimiento(x,y,-1,-1)
+            self.rotX -= 2
+            self.movimiento(self.rotX,self.roty,-1,1)
         elif (self.rotationVar > 180 and self.rotationVar < 270):
-            self.movimiento(x,y,-1,1)
+            self.roty -= 2
+            self.movimiento(self.rotX,self.roty,-1,-1)
         elif (self.rotationVar > 270 and self.rotationVar < 360):
-            self.movimiento(x,y,1,1)
-        elif (self.rotationVar == 0):
-            self.movimiento(x,y,1,0)
+            self.rotX += 2
+            self.movimiento(self.rotX,self.roty,1,-1)
         elif (self.rotationVar == 90):
-            self.movimiento(x,y,0,-1)
+            self.rotX -= 2
+            self.movimiento(self.rotX,self.roty,0,1)
         elif (self.rotationVar == 180):
-            self.movimiento(x,y,-1,0)
+            self.roty -= 2
+            self.movimiento(self.rotX,self.roty,-1,0)
         elif (self.rotationVar == 270):
-            self.movimiento(x,y,0,1)
+            self.rotX += 2
+            self.movimiento(self.rotX,self.roty,0,-1)
+        if (self.rotationVar == 0):
+            self.rotX = self.label.x() + 30
+            self.roty = self.label.y() + 13
+            self.movimiento(self.rotX,self.roty,1,0)
     def drawPoints(self, qp):
         pen = QtGui.QPen()
         pen.setWidth(1)
