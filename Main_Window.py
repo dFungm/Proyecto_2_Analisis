@@ -46,20 +46,22 @@ class Ui_MainWindow(QWidget):
     def setupUi(self):
         self.echo = QPixmap('imgs/Echo.png')
         self.barra = QPixmap('imgs/Espejo.png')
+        self.barral = QPixmap('imgs/Espejo_l.png')
+        self.barrahori = QPixmap('imgs/Espejo_dash.png')
 
         transform_1 = QtGui.QTransform()
         transform_1.rotate(45)
         transform_2 = QtGui.QTransform()
         transform_2.rotate(90)
         transform_3 = QtGui.QTransform()
-        transform_3.rotate(135)
+        transform_3.rotate(180)
         transform_4 = QtGui.QTransform()
         transform_4.rotate(225)
 
         self.rotated_pixmap1 = self.barra.transformed(transform_1)
         self.rotated_pixmap2 = self.barra.transformed(transform_2)
-        self.rotated_pixmap3 = self.barra.transformed(transform_3)
-        self.rotated_pixmap4 = self.barra.transformed(transform_4)
+        self.rotated_pixmap3 = self.barral.transformed(transform_3)
+        self.rotated_pixmap4 = self.barrahori.transformed(transform_2)
 
         self.Button = QtWidgets.QPushButton("Rotar", self.centralwidget)
         self.Button.setGeometry(QtCore.QRect(0, 0, 60, 20))
@@ -71,23 +73,39 @@ class Ui_MainWindow(QWidget):
         self.label.setGeometry(QtCore.QRect(210, 210, 47, 13))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(380, 210, 47, 13))
+        self.label_2.setGeometry(QtCore.QRect(470, 210, 47, 13))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(210, 70, 47, 13))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(60, 120, 47, 13))
+        self.label_4.setGeometry(QtCore.QRect(60, 140, 47, 13))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(70, 320, 47, 13))
+        self.label_5.setGeometry(QtCore.QRect(130, 320, 47, 13))
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
-        self.label_6.setGeometry(QtCore.QRect(420, 40, 47, 13))
+        self.label_6.setGeometry(QtCore.QRect(390, 40, 47, 13))
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(370, 380, 47, 13))
-        self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(self.centralwidget)
+        self.label_8.setGeometry(QtCore.QRect(124, 237, 47, 13))
+        self.label_9 = QtWidgets.QLabel(self.centralwidget)
+        self.label_9.setGeometry(QtCore.QRect(405, 82, 47, 13))
+        self.label_10 = QtWidgets.QLabel(self.centralwidget)
+        self.label_10.setGeometry(QtCore.QRect(142, 60, 47, 13))
+        self.label_11 = QtWidgets.QLabel(self.centralwidget)
+        self.label_11.setGeometry(QtCore.QRect(459, 133, 47, 13))
+        self.label_12 = QtWidgets.QLabel(self.centralwidget)
+        self.label_12.setGeometry(QtCore.QRect(264, 54, 47, 13))
+        self.label_13 = QtWidgets.QLabel(self.centralwidget)
+        self.label_13.setGeometry(QtCore.QRect(252, 398, 47, 13))
+        self.label_14 = QtWidgets.QLabel(self.centralwidget)
+        self.label_14.setGeometry(QtCore.QRect(131, 206, 47, 13))
+        self.label_15 = QtWidgets.QLabel(self.centralwidget)
+        self.label_15.setGeometry(QtCore.QRect(155, 395, 47, 13))
+
 
         self.MainWindow.setCentralWidget(self.centralwidget)
 
@@ -121,45 +139,155 @@ class Ui_MainWindow(QWidget):
         self.label_5.setText(_translate("MainWindow", "TextLabel"))
         self.label_6.setText(_translate("MainWindow", "TextLabel"))
         self.label_7.setText(_translate("MainWindow", "TextLabel"))
+        self.label_8.setText(_translate("MainWindow", "TextLabel"))
+        self.label_9.setText(_translate("MainWindow", "TextLabel"))
+        self.label_10.setText(_translate("MainWindow", "TextLabel"))
+        self.label_11.setText(_translate("MainWindow", "TextLabel"))
+        self.label_12.setText(_translate("MainWindow", "TextLabel"))
+        self.label_13.setText(_translate("MainWindow", "TextLabel"))
+        self.label_14.setText(_translate("MainWindow", "TextLabel"))
+        self.label_15.setText(_translate("MainWindow", "TextLabel"))
+
         self.label.setPixmap(self.echo)
         self.label.resize(self.echo.width(), self.echo.height())
-        self.label_2.setPixmap(self.barra)
-        self.label_2.resize(self.barra.width(), self.barra.height())
+
+        self.label_2.setPixmap(self.rotated_pixmap3)
+        self.label_2.resize(self.rotated_pixmap3.width(), self.rotated_pixmap3.height())
+
         self.label_3.setPixmap(self.rotated_pixmap2)
         self.label_3.resize(self.rotated_pixmap2.width(), self.rotated_pixmap2.height())
+
         self.label_4.setPixmap(self.rotated_pixmap4)
         self.label_4.resize(self.rotated_pixmap4.width(), self.rotated_pixmap4.height())
-        self.label_5.setPixmap(self.rotated_pixmap3)
-        self.label_5.resize(self.rotated_pixmap3.width(), self.rotated_pixmap3.height())
-        self.label_6.setPixmap(self.barra)
-        self.label_6.resize(self.barra.width(), self.barra.height())
-        self.label_7.setPixmap(self.rotated_pixmap1)
-        self.label_7.resize(self.rotated_pixmap1.width(), self.rotated_pixmap1.height())
-        self.Muros = [self.label_2,self.label_3,self.label_4,self.label_5,self.label_6,self.label_7]
+
+        self.label_5.setPixmap(self.barral)
+        self.label_5.resize(self.barral.width(), self.barral.height())
+
+        self.label_6.setPixmap(self.rotated_pixmap3)
+        self.label_6.resize(self.rotated_pixmap3.width(), self.rotated_pixmap3.height())
+
+        self.label_7.setPixmap(self.barra)
+        self.label_7.resize(self.barra.width(), self.barra.height())
+
+        self.label_8.setPixmap(self.barra)
+        self.label_8.resize(self.barra.width(), self.barra.height())
+
+        self.label_9.setPixmap(self.rotated_pixmap2)
+        self.label_9.resize(self.rotated_pixmap2.width(), self.rotated_pixmap2.height())
+
+        self.label_10.setPixmap(self.rotated_pixmap2)
+        self.label_10.resize(self.rotated_pixmap2.width(), self.rotated_pixmap2.height())
+
+        self.label_11.setPixmap(self.barrahori)
+        self.label_11.resize(self.barrahori.width(), self.barrahori.height())
+
+        self.label_12.setPixmap(self.barrahori)
+        self.label_12.resize(self.barrahori.width(), self.barrahori.height())
+
+        self.label_13.setPixmap(self.barrahori)
+        self.label_13.resize(self.barrahori.width(), self.barrahori.height())
+
+        self.label_14.setPixmap(self.rotated_pixmap4)
+        self.label_14.resize(self.rotated_pixmap4.width(), self.rotated_pixmap4.height())
+
+        self.label_15.setPixmap(self.rotated_pixmap3)
+        self.label_15.resize(self.rotated_pixmap3.width(), self.rotated_pixmap3.height())
+
+        #pixmap 4 = /
+        #pixmap 2 = |
+        #pixmap 3 = L
+        self.label_5.setText('2')
+        self.label_3.setText('2')
+        self.label_14.setText('2')
+        self.label_4.setText('2')
+        self.label_10.setText('2')
+        self.label_9.setText('2')
+        self.label_15.setText('2')
+
+        self.Muros = [self.label_3,self.label_7,self.label_8,self.label_10,self.label_9]
+        self.MurosL = [self.label_2,self.label_6,self.label_5,self.label_15]
+        self.MurosDash = [self.label_4,self.label_12,self.label_13,self.label_14,self.label_11]
         self.MurosCoords = []
         for muro in self.Muros:
+            muro.hide()
             i=0
-            k=0
-            x = muro.x()
-            y = muro.y()
+            x = muro.x() + muro.width()
+            y = muro.y() + muro.height()
             cord = [x,y]
-            while i != muro.width()//2 and k != muro.height()//2:
-                cordtemp = [x-i,y+k]
-                cordtemp2 = [x+i,y-k]
-                cordtemp3 = [x - i, y - k]
-                cordtemp4 = [x + i, y + k]
-                self.MurosCoords.append(cordtemp)
-                self.MurosCoords.append(cordtemp2)
-                self.MurosCoords.append(cordtemp3)
-                self.MurosCoords.append(cordtemp4)
-                i+=1
-                k+=1
+            if muro.text() == '2':
+                while i != 36:
+                    y -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+            else:
+                while i != 36:
+                    x -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
             self.MurosCoords.append(cord)
-
+        for muro in self.MurosL:
+            muro.hide()
+            i = 0
+            x = muro.x() + muro.width()
+            y = muro.y() + muro.height()
+            cord = [x, y]
+            self.MurosCoords.append(cord)
+            if muro.text() == '2':
+                while i != 20:
+                    x -= 1
+                    i += 1
+                    cordtemp = [x,y]
+                    self.MurosCoords.append(cordtemp)
+                i = 0
+                while i != 20:
+                    y -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+            else:
+                while i != 20:
+                    y -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+                i = 0
+                while i != 20:
+                    x -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+        for muro in self.MurosDash:
+            muro.hide()
+            i = 0
+            if muro.text() == '2':
+                x = muro.x() + muro.width()
+                y = muro.y() + muro.height()
+                cord = [x, y]
+                self.MurosCoords.append(cord)
+                while i != 40:
+                    x -= 1
+                    y -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+                i = 0
+            else:
+                x = muro.x() + muro.width() - 39
+                y = muro.y() + muro.height()
+                cord = [x, y]
+                self.MurosCoords.append(cord)
+                while i != 40:
+                    x += 1
+                    y -= 1
+                    i += 1
+                    cordtemp = [x, y]
+                    self.MurosCoords.append(cordtemp)
+                i = 0
         self.menuEcho_Locator.setTitle(_translate("MainWindow", "Echo Locator"))
         self.rotX = self.label.x() + 25
         self.roty = self.label.y() + 13
-        self.drawPointsPrueba(QPainter(self.lbl.pixmap()),self.rotX,self.roty)
 
     def rotation(self):
         if self.rotationVar == 355:
